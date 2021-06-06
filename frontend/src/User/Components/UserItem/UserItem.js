@@ -7,7 +7,7 @@ export default function UserItem(props) {
 
     return (
         <li className="user-item">
-            <Link className="link" to="/1/recipes">
+            <Link className="link" to={`/${props.id}/recipes`}>
                 <Card className="user-item__content">
                     <div className="user-item__info">
                         <h2>{props.firstName} {props.lastName}</h2>

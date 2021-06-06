@@ -5,6 +5,7 @@ import Users from './User/Pages/Users'
 import React from 'react';
 import MainNavigation from './Components/MainNavigation/MainNavigation'
 import Recipes from './Recipe/Pages/Recipes'
+import NewRecipe from './Recipe/Pages/NewRecipe'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
           </Route>
           <Route path="/:userID/recipes" exact>
             <Recipes />
+          </Route>
+          <Route path="/recipe/new" exact>
+            <NewRecipe />
           </Route>
 
         </Switch>
