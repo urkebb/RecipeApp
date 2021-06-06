@@ -1,0 +1,18 @@
+.user-item{
+  
+    margin: 1rem;
+    min-width: 17.5rem;
+    text-align: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.user-item__content:hover{
+    background: #ffd900;
+}
+
+.link{
+    text-decoration: none;
+    color:black;
+}
+

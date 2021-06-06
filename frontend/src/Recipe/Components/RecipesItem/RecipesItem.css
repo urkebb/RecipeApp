@@ -1,0 +1,44 @@
+.recipe-item {
+    margin: 1rem 0;
+    width: 100%;
+}
+.recipe-item__content {
+    padding: 0;
+}
+
+.recipe-item__info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.recipe-item__image {
+    width: 100%;
+    height: 20rem;
+    margin-right: 1.5rem;
+}
+
+.recipe-item__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recipe-item__steps {
+    text-align: left;
+    float: left;
+    width: 50%;
+}
+
+.recipe-item__steps p {
+   margin-top: -10px;
+}
+
+.recipe-item__ingredients {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+.recipe-item__ingredients p{
+    margin-top: -10px;
+}
+
