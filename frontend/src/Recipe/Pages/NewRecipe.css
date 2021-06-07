@@ -37,41 +37,41 @@
     margin: 0px;
     margin-right: 0px;
 }
-.inputFields__steps textarea {
+.inputFields__steps input {
     text-align: left;
     width: 80%;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 17px;
     outline: none;
+    margin-bottom: 15px;
 }
 .inputFields__steps button {
-    
-    margin-left: 10px;
+    margin-left: 1px;
 }
-.inputFields__ingredients{
+.inputFields__ingredients {
     text-align: left;
 }
 .inputFields__ingredients__name {
-   float:left;
-   margin-top :0;
+    float: left;
+    margin-top: 0;
 
-   width:15%;
+    width: 15%;
 }
 
 .inputFields__ingredients__amount {
-   float:left;
-   margin-top: 0;
-   width:15%;
- }
-
- .inputFields__ingredients__unit {
-    float:left;
+    float: left;
     margin-top: 0;
-    width:15%;
-  }
+    width: 15%;
+}
 
- .inputFields__ingredients input{
+.inputFields__ingredients__unit {
+    float: left;
+    margin-top: 0;
+    width: 15%;
+}
+
+.inputFields__ingredients input {
     text-align: left;
     width: 80%;
     height: 20px;
@@ -79,7 +79,7 @@
     padding-left: 10px;
     padding-right: 10px;
     outline: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 @media (max-width: 1100px) {
@@ -89,13 +89,16 @@
     .inputFields__title h3 {
         float: none;
     }
-    .inputFields__title input{
-        width:90%;
+    .inputFields__title input {
+        width: 90%;
     }
-    .inputFields__steps textarea{
-        width:90%;
+    .inputFields__steps textarea {
+        width: 90%;
     }
     .inputFields__steps h3 {
         float: none;
+    }
+    .inputFields__ingredients input {
+        width: 90%;
     }
 }
