@@ -9,7 +9,7 @@
 }
 .inputFields__title h3 {
     float: left;
-    width: 15%;
+    width: 20%;
     text-align: left;
     padding: 0px;
     margin: 0px;
@@ -17,13 +17,14 @@
 }
 .inputFields__title input {
     text-align: left;
-    width: 80%;
+    width: 75%;
     height: 20px;
     font-size: 17px;
     padding-left: 10px;
     padding-right: 10px;
     outline: none;
 }
+
 
 .inputFields__steps {
     text-align: left;
@@ -31,7 +32,7 @@
 
 .inputFields__steps h3 {
     float: left;
-    width: 15%;
+    width: 20%;
     text-align: left;
     padding: 0px;
     margin: 0px;
@@ -39,41 +40,39 @@
 }
 .inputFields__steps input {
     text-align: left;
-    width: 80%;
+    width: 75%;
     padding-left: 10px;
     padding-right: 10px;
     font-size: 17px;
     outline: none;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
-.inputFields__steps button {
-   
-}
+
 .inputFields__ingredients {
     text-align: left;
 }
+
 .inputFields__ingredients__name {
     float: left;
     margin-top: 0;
-
-    width: 15%;
+    width: 20%;
 }
 
 .inputFields__ingredients__amount {
     float: left;
     margin-top: 0;
-    width: 15%;
+    width: 20%;
 }
 
 .inputFields__ingredients__unit {
     float: left;
     margin-top: 0;
-    width: 15%;
+    width: 20%;
 }
 
 .inputFields__ingredients input {
     text-align: left;
-    width: 80%;
+    width: 75%;
     height: 20px;
     font-size: 17px;
     padding-left: 10px;
@@ -81,6 +80,8 @@
     outline: none;
     margin-bottom: 15px;
 }
+
+
 
 @media (max-width: 1100px) {
     .newRecipe {

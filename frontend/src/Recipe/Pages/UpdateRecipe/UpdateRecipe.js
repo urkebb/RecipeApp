@@ -1,17 +1,83 @@
-import React, { useState } from 'react'
-import Card from '../../Components/Card/Card'
-import Button from '../../Components/Button/Button'
-import ImageUpload from '../../Components/ImageUpload/ImageUpload'
-import './NewRecipe.css'
-
-export default function NewRecipe() {
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Card from '../../../Components/Card/Card'
+import Button from '../../../Components/Button/Button'
 
 
-    const [inputStep, setInputStep] = useState('');
-    const [inputIngredientName, setInputIngredientName] = useState('');
-    const [inputIngredientAmount, setInputIngredientAmount] = useState('');
-    const [inputIngredientUnit, setInputIngredientUnit] = useState('');
-    const [submitClicked, setIsSubmitClicked] = useState(false);
+const picture = "https://handletheheat.com/wp-content/uploads/2015/03/Best-Birthday-Cake-with-milk-chocolate-buttercream-SQUARE.jpg";
+
+const DUMMY_RECIPES = [{
+    id: 1,
+    userID: 1,
+    title: "Naslov",
+    description: "OPIS",
+    picture: picture,
+    steps: [{
+        description: "ovo je prvi korak"
+    }, {
+        description: "ovo je drugi korak"
+    }],
+    ingredients: [{
+        name: "flour",
+        amount: 100,
+        unit: "gram"
+    }, {
+        name: "banana",
+        amount: 2,
+        unit: "piece"
+    }]
+}, {
+    id: 2,
+    userID: 2,
+    title: "Naslov",
+    description: "OPIS",
+    picture: picture,
+    steps: [{
+        description: "ovo je prvi korak"
+    }, {
+        description: "ovo je drugi korak"
+    }],
+    ingredients: [{
+        name: "flour",
+        amount: 100,
+        unit: "gram"
+    }, {
+        name: "banana",
+        amount: 2,
+        unit: "piece"
+    }]
+}, {
+    id: 3,
+    userID: 1,
+    title: "Naslov",
+    description: "OPIS",
+    picture: picture,
+    steps: [{
+        description: "ovo je prvi korak"
+    }, {
+        description: "ovo je drugi korak"
+    }],
+    ingredients: [{
+        name: "flour",
+        amount: 100,
+        unit: "gram"
+    }, {
+        name: "banana",
+        amount: 2,
+        unit: "piece"
+    }, {
+        name: "banana",
+        amount: 2,
+        unit: "piece"
+    },
+    {
+        name: "banana",
+        amount: 2,
+        unit: "piece"
+    }]
+}];
+
+export default function UpdateRecipe() {
 
     const [values, setValues] = useState({
         Title: '',
@@ -20,8 +86,40 @@ export default function NewRecipe() {
         Steps: [],
         Ingredients: []
     });
+    const [submitClicked, setIsSubmitClicked] = useState(false);
+    const [inputStep, setInputStep] = useState('');
+    const [inputIngredientName, setInputIngredientName] = useState('');
+    const [inputIngredientAmount, setInputIngredientAmount] = useState('');
+    const [inputIngredientUnit, setInputIngredientUnit] = useState('');
 
+    const recipeID = useParams().recipeID;
 
+    const identifiedRecipe = DUMMY_RECIPES.find(r => {
+        return r.id == recipeID;
+    })
+
+    useEffect(() => {
+        if (identifiedRecipe) {
+            setValues(() => {
+                return {
+                    Title: identifiedRecipe.title,
+                    Description: identifiedRecipe.description,
+                    Picture: identifiedRecipe.picture,
+                    Steps: identifiedRecipe.steps,
+                    Ingredients: identifiedRecipe.ingredients
+                }
+            })
+        }
+    }, [])
+
+    function onUpdateHandler(e) {
+        e.preventDefault();
+        console.log("ovo se serveru salje\n" + JSON.stringify(values));
+        if (values.Title != '' && values.Ingredients.length > 0 && values.Steps.length > 0 && values.Picture) {
+            setIsSubmitClicked(false);
+        }
+    }
+    console.log(values);
 
     function handleAddStep() {
 
@@ -39,7 +137,6 @@ export default function NewRecipe() {
             setInputStep('');
         }
     }
-
     function addIngredientHandler() {
 
         if (inputIngredientAmount != '' && inputIngredientName != '' && inputIngredientUnit != '') {
@@ -61,35 +158,34 @@ export default function NewRecipe() {
 
     }
 
-    function onSubmitHandler(e) {
-        e.preventDefault();
-        if (values.Title != '' && values.Ingredients.length > 0 && values.Steps.length > 0 && values.Picture) {
-            console.log("ovo se salje serveru\n" + JSON.stringify(values));
-            setValues({
-                Title: '',
-                Description:'',
-                Picture: null,
-                Steps: [],
-                Ingredients: []
-            })
-            setIsSubmitClicked(false);
-        }
-    }
-
-    function imageInputHandler(id, pickedImage, isValid) {
+    function deleteStep() {
         setValues(() => {
             return {
                 ...values,
-                Picture: pickedImage.name
+                //Steps: values.Steps.splice(values.Steps.length - 1, 1)
+                Steps: values.Steps.filter((el, idx) => {
+                    return idx != values.Steps.length - 1
+                })
+            }
+
+        })
+        console.log("AFTER DELETING \n", JSON.stringify(values));
+    }
+    function deleteIngredient() {
+        setValues(() => {
+            return {
+                ...values,
+                Ingredients: values.Ingredients.filter((el, idx) => {
+                    return idx != values.Ingredients.length - 1
+                })
             }
         })
+
     }
-
-
 
     return (
         <Card className="newRecipe">
-            <form className="inputFields" onSubmit={onSubmitHandler}>
+            <form className="inputFields" onSubmit={onUpdateHandler}>
                 <div className="inputFields__title">
                     <h3>Title</h3>
                     <input type="text" value={values.Title} onChange={(e) => {
@@ -106,7 +202,7 @@ export default function NewRecipe() {
                 <div className="inputFields__title">
                     <h3>Description</h3>
                     <input type="text" value={values.Description} onChange={e => {
-                        setValues(()=>{
+                        setValues(() => {
                             return {
                                 ...values,
                                 Description: e.target.value
@@ -129,11 +225,10 @@ export default function NewRecipe() {
                         textAlign: "right",
                         width: "98%",
 
-                    }}>
-                        <Button
-                            text="ADD STEP"
-                            onClick={handleAddStep}
-                        />
+                    }}><div>
+                            <button style={{ marginRight: "15px" }} onClick={deleteStep}>DELETE LAST STEP</button>
+                            <button onClick={handleAddStep}>ADD STEP</button>
+                        </div>
                     </div>
                 </div>
                 <div className="inputFields__ingredients">
@@ -152,20 +247,18 @@ export default function NewRecipe() {
                         width: "98%",
                     }}>
                         {submitClicked && values.Ingredients.length == 0 ? (<p style={{ color: "red", marginTop: "0px", textAlign: "left" }}>Unesite bar jedan sastojak</p>) : <p></p>}
-                        <Button text="ADD INGREDIENT"
-                            onClick={addIngredientHandler} />
+                        <button onClick={deleteIngredient} style={{ marginRight: "15px" }}>DELETE LAST INGREDIENT</button>
+                        <button onClick={addIngredientHandler} >ADD INGREDIENT </button>
                     </div>
                 </div>
-                <div>
-                    <ImageUpload center id="image" onInput={imageInputHandler} />
-                </div>
+
                 <button
                     type="submit"
                     onClick={() => {
                         setIsSubmitClicked(true);
                     }}
                     text="SUBMIT"
-                >SUBMIT</button>
+                >Update</button>
             </form>
         </Card>
     )

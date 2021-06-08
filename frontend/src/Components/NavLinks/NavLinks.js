@@ -1,35 +1,42 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../AuthContext/AuthContext'
+import { useHistory } from 'react-router-dom';
 import './NavLinks.css'
 
 export default function NavLinks() {
 
-    const link="/1/recipes"
+    const authContext = useContext(AuthContext);
+    const history = useHistory();
+    const link = "/1/recipes"
+
+    function logoutHandler() {
+        authContext.logout();
+        history.push("/auth");
+    }
 
     return <ul className="nav-links">
-        <li>
+        {authContext.isLoggedIn && <li>
             <NavLink to="/" exact>ALL USERS</NavLink>
-        </li>
+        </li>}
 
-        <li>
+        {authContext.isLoggedIn && <li>
             <NavLink to={link}>MY RECIPES</NavLink>
-        </li>
+        </li>}
 
 
-        <li>
+        {authContext.isLoggedIn && <li>
             <NavLink to="/recipe/new">ADD RECIPE</NavLink>
-        </li>
+        </li>}
 
 
-        <li>
-            <NavLink to="/auth">REGISTER</NavLink>
-        </li>
+        {!authContext.isLoggedIn && <li>
+            <NavLink to="/auth">AUTHENTICATE</NavLink>
+        </li>}
 
 
-        <li>
-            <button className="logout">LOGOUT</button>
-        </li>
-
-
+        {authContext.isLoggedIn && <li>
+            <button onClick={logoutHandler} className="logout">LOGOUT</button>
+        </li>}
     </ul>
 }

@@ -8,6 +8,7 @@ const recipes = [{
     id: 1,
     userID: 1,
     title: "Naslov",
+    description: "OPIS",
     picture: picture,
     steps: [{
         description: "ovo je prvi korak"
@@ -24,9 +25,10 @@ const recipes = [{
         unit: "piece"
     }]
 }, {
-    id: 1,
+    id: 5,
     userID: 2,
     title: "Naslov",
+    description: "OPIS",
     picture: picture,
     steps: [{
         description: "ovo je prvi korak"
@@ -43,9 +45,10 @@ const recipes = [{
         unit: "piece"
     }]
 }, {
-    id: 2,
-    userID: 1,
+    id: 3,
+    userID: 2,
     title: "Naslov",
+    description: "OPIS",
     picture: picture,
     steps: [{
         description: "ovo je prvi korak"
@@ -76,6 +79,11 @@ export default function Recipes() {
     const [loadedRecipes, setLoadedRecipes] = useState([])
 
     const userID = useParams().userID;
+    function deleteRecipe(recipeID) {
+        setLoadedRecipes(loadedRecipes.filter((r)=>{
+            return r.id != recipeID;
+        })) 
+    }
 
     useEffect(() => {
         const response = JSON.stringify(recipes);
@@ -88,7 +96,7 @@ export default function Recipes() {
 
     return (
         <div>
-            <RecipesList items={loadedRecipes} />
+            <RecipesList items={loadedRecipes} deleteRecipe={deleteRecipe} />
         </div>
     )
 

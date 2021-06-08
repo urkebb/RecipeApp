@@ -19,9 +19,11 @@ export default function RecipesList(props) {
                         id={r.id}
                         userID={r.userID}
                         title={r.title}
+                        description={r.description}
                         picture={r.picture}
                         steps={r.steps}
                         ingredients={r.ingredients}
+                        deleteRecipe={props.deleteRecipe}
                     />
                 })}
             </ul>
