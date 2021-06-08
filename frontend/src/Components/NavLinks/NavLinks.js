@@ -36,7 +36,7 @@ export default function NavLinks() {
 
 
         {authContext.isLoggedIn && <li>
-            <button onClick={logoutHandler} className="logout">LOGOUT</button>
+            <button onClick={logoutHandler} >LOGOUT</button>
         </li>}
     </ul>
 }

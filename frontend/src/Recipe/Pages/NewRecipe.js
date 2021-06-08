@@ -6,6 +6,7 @@ import './NewRecipe.css'
 
 export default function NewRecipe() {
 
+ 
 
     const [inputStep, setInputStep] = useState('');
     const [inputIngredientName, setInputIngredientName] = useState('');
@@ -72,6 +73,7 @@ export default function NewRecipe() {
                 Steps: [],
                 Ingredients: []
             })
+            
             setIsSubmitClicked(false);
         }
     }

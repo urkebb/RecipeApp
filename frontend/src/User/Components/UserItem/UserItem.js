@@ -11,9 +11,6 @@ export default function UserItem(props) {
                 <Card className="user-item__content">
                     <div className="user-item__info">
                         <h2>{props.firstName} {props.lastName}</h2>
-                        <p>id: {props.id}</p>
-                        <p>email: {props.email}</p>
-                        <p>password: {props.password}</p>
                     </div>
                 </Card>
             </Link>
