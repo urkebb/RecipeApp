@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Card from '../../Components/Card/Card'
 import Button from '../../Components/Button/Button'
+import ImageUpload from '../../Components/ImageUpload/ImageUpload'
 import './NewRecipe.css'
+import { useHistory } from 'react-router-dom';
 
 export default function NewRecipe() {
 
-
+    const history = useHistory();
     const [inputStep, setInputStep] = useState('');
     const [inputIngredientName, setInputIngredientName] = useState('');
     const [inputIngredientAmount, setInputIngredientAmount] = useState('');
@@ -14,9 +16,12 @@ export default function NewRecipe() {
 
     const [values, setValues] = useState({
         Title: '',
+        Picture: null,
         Steps: [],
         Ingredients: []
     });
+
+
 
     function handleAddStep() {
 
@@ -58,12 +63,27 @@ export default function NewRecipe() {
 
     function onSubmitHandler(e) {
         e.preventDefault();
-
-        if (values.Title != '' && values.Ingredients.length > 0 && values.Steps.length > 0) {
-            console.log("ovo se salje serveru" + JSON.stringify(values));
-
+        if (values.Title != '' && values.Ingredients.length > 0 && values.Steps.length > 0 && values.Picture) {
+            console.log("ovo se salje serveru\n" + JSON.stringify(values));
+            setValues({
+                Title: '',
+                Picture: null,
+                Steps: [],
+                Ingredients: []
+            })
+            setIsSubmitClicked(false);
         }
     }
+
+    function imageInputHandler(id, pickedImage, isValid) {
+        setValues(() => {
+            return {
+                ...values,
+                Picture: pickedImage.name
+            }
+        })
+    }
+
 
 
     return (
@@ -80,16 +100,17 @@ export default function NewRecipe() {
                             }
                         })
                     }}></input>
-                    {submitClicked && values.Title == '' ? (<p style={{ color: "red", marginTop: "10px" }}>Morate uneti naslov</p>) : <p></p>}
+                    {submitClicked && values.Title == '' ? (<p style={{ color: "red", marginTop: "10px" }}>Unesite naslov</p>) : <p></p>}
                 </div>
                 <div className="inputFields__steps">
                     <h3>Steps</h3>
                     <input type="text" value={inputStep} onChange={e => {
                         setInputStep(e.target.value);
                     }}></input>
-                    {submitClicked && values.Steps.length == 0 ? (<p style={{ color: "red", marginTop: "10px" }}>Morate uneti bar jedan korak</p>) : <p></p>}
+                    {submitClicked && values.Steps.length == 0 ? (<p style={{ color: "red", marginTop: "0px" }}>Unesite bar jedan korak</p>) : <p></p>}
                     <div style={{
                         textAlign: "right",
+                        width: "98%",
 
                     }}>
                         <Button
@@ -111,17 +132,23 @@ export default function NewRecipe() {
                     }} type="text"></input>
                     <div style={{
                         textAlign: "right",
+                        width: "98%",
                     }}>
-                        {submitClicked && values.Ingredients.length == 0 ? (<p style={{ color: "red", marginTop: "10px",textAlign:"left" }}>Morate uneti bar jedan sastojak</p>) : <p></p>}
+                        {submitClicked && values.Ingredients.length == 0 ? (<p style={{ color: "red", marginTop: "0px", textAlign: "left" }}>Unesite bar jedan sastojak</p>) : <p></p>}
                         <Button text="ADD INGREDIENT"
                             onClick={addIngredientHandler} />
                     </div>
                 </div>
+                <div>
+                    <ImageUpload center id="image" onInput={imageInputHandler} />
+                </div>
                 <button
                     type="submit"
-                    onClick={() => { setIsSubmitClicked(true) }}>
-                    SUBMIT
-               </button>
+                    onClick={() => {
+                        setIsSubmitClicked(true);
+                    }}
+                    text="SUBMIT"
+                >SUBMIT</button>
             </form>
         </Card>
     )

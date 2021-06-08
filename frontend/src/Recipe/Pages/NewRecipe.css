@@ -47,7 +47,7 @@
     margin-bottom: 15px;
 }
 .inputFields__steps button {
-    margin-left: 1px;
+   
 }
 .inputFields__ingredients {
     text-align: left;
@@ -92,7 +92,7 @@
     .inputFields__title input {
         width: 90%;
     }
-    .inputFields__steps textarea {
+    .inputFields__steps input {
         width: 90%;
     }
     .inputFields__steps h3 {
